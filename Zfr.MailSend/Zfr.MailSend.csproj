@@ -4,6 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>Zafer</Authors>
     <Description>Sending email from gmail email address</Description>
+    <RepositoryUrl>https://github.com/zafermoda/Zfr.MailSend</RepositoryUrl>
+    <PackageTags>email, send</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
