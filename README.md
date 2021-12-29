@@ -1,5 +1,5 @@
 # Zfr.MailSend
-Sending email from gmail email address 
+Sending email from gmail email address
 
 # Add this code to appsettings.json
 
