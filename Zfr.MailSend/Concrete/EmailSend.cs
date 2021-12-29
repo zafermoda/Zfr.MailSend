@@ -19,6 +19,13 @@ namespace Zfr.MailSend.Concrete
             _configuration = configuration;
         }
 
+        public class MailModel
+        {
+            public string Subject { get; set; }
+            public string Body { get; set; }
+            public List<MailAddress> ToMailList { get; set; }
+        }
+
         public void SendEmailConfirmationCodeWithGmail(string subject, string body, List<MailAddress> toMailList)
         {
             try
@@ -49,6 +56,55 @@ namespace Zfr.MailSend.Concrete
 
                 message.Subject = subject;
                 message.Body = body;
+                message.IsBodyHtml = true;
+
+                using var smtp = new SmtpClient(
+                    mailHost,
+                    mailPort);
+                smtp.EnableSsl = true;
+                smtp.Credentials =
+                    new NetworkCredential(
+                        mailUser,
+                        mailPass);
+
+                smtp.Send(message);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void SendEmailConfirmationCodeWithGmail(MailModel model)
+        {
+            try
+            {
+                var mailHost = _configuration.GetSection("Email")["MailHost"];
+                var mailPort = Convert.ToInt32(_configuration.GetSection("Eposta")["MailPort"]);
+                var mailUser = _configuration.GetSection("Email")["MailUser"];
+                var mailPass = _configuration.GetSection("Email")["MailPass"];
+
+                #region add to appsettings.json file
+                /* add this code to appsettings.json 
+                "Email": {
+                    "MailHost": "smtp.gmail.com",
+                    "MailPort": "587",
+                    "MailUser": "youremailaddress@gmail.com",
+                    "MailPass": "*********"
+                }
+                */
+                #endregion
+
+                var message = new MailMessage();
+                message.From = new MailAddress(mailUser);
+
+                model.ToMailList.ForEach(x =>
+                {
+                    message.To.Add(new MailAddress(x.Address, x.DisplayName));
+                });
+
+                message.Subject = model.Subject;
+                message.Body = model.Body;
                 message.IsBodyHtml = true;
 
                 using var smtp = new SmtpClient(
