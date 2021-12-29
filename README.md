@@ -36,6 +36,6 @@ To controller
 
     _emailSend.SendEmailConfirmationCodeWithGmail(string subject, string body, List<MailAddress> toMailList);
     
-    or
+or
     
     _emailSend.SendEmailConfirmationCodeWithGmail(MailModel model);
