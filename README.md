@@ -1,6 +1,9 @@
 # Zfr.MailSend
 Sending email from gmail email address 
 
+# Nuget Package
+https://www.nuget.org/packages/Zfr.MailSend/
+
 # Add this code to appsettings.json
 
     "Email": {
