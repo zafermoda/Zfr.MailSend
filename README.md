@@ -1,5 +1,5 @@
 # Zfr.MailSend
-Sending email from gmail email address
+Sending email from gmail email address 
 
 # Add this code to appsettings.json
 
@@ -33,7 +33,11 @@ To controller
     }
 
 # Use
-
+    
+    var mailAdress = new MailAddress("tomailadress@gmail.com", "Name");
+    var toMailList = new List<MailAddress>();
+    toMailList.Add(mailAdress);
+    
     _emailSend.SendEmailConfirmationCodeWithGmail(string subject, string body, List<MailAddress> toMailList);
     
 or
